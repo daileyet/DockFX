@@ -24,36 +24,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.0</version>
-                <configuration>
-                    <archive>
-                        <manifestFile>target/classes/META-INF/MANIFEST.MF</manifestFile>
-                        <manifest>
-                            <mainClass>org.dockfx.demo.DockFX</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.5.4</version>
-                <executions>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>manifest</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>${project.groupId}</Bundle-SymbolicName>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>org.dockfx</Export-Package>
-                        <Private-Package>org.dockfx.demo</Private-Package>
-                    </instructions>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -61,6 +31,8 @@
                 <version>3.3</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <target>${maven.compiler.target}</target>
+                    <source>${maven.compiler.source}</source>
                 </configuration>
             </plugin>
             <plugin>
@@ -73,29 +45,16 @@
             </plugin>
         </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.8</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.16</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>checkstyle</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-                <configuration>
-                    <configLocation>google_checks.xml</configLocation>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+    <distributionManagement>
+        <repository>
+            <id>open-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://nb.openthinks.com:18081/nexus/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>open-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://nb.openthinks.com:18081/nexus/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

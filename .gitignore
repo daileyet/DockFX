@@ -10,3 +10,6 @@ dockfxdemo.jar
 .git/modules
 /bin
 target
+.idea/.gitignore
+.idea/
+dockfx.iml
